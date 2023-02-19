@@ -4,7 +4,6 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { Box } from './Box/Box';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 
 import css from '../components/App.module.css';
 
@@ -22,8 +21,8 @@ export class App extends Component {
   };
 
   onAddContact = ({ name, number }) => {
-    if (this.isDublicate({ name, number })) {
-      return alert(`${name} - ${number} is alraedy exist`);
+    if (this.isDublicate({ name })) {
+      return alert(`${name} is alraedy exist`);
     }
     this.setState(prevState => {
       const { contacts } = prevState;
@@ -36,15 +35,12 @@ export class App extends Component {
     });
   };
 
-  isDublicate({ name, number }) {
+  isDublicate({ name }) {
     const { contacts } = this.state;
     const normalizedName = name.toLowerCase();
 
     const dublicate = contacts.find(contact => {
-      return (
-        contact.name.toLowerCase() === normalizedName &&
-        contact.number === number
-      );
+      return contact.name.toLowerCase() === normalizedName;
     });
 
     return Boolean(dublicate);
@@ -98,14 +94,3 @@ export class App extends Component {
     );
   }
 }
-
-App.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  filter: PropTypes.string,
-};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import css from './Box.module.css';
 
 export const Box = ({ title, children }) => {
@@ -7,4 +8,9 @@ export const Box = ({ title, children }) => {
       {children}
     </div>
   );
+};
+
+Box.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
 };
