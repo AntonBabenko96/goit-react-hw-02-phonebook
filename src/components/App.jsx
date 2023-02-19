@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
 import { Box } from './Box/Box';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
@@ -86,11 +87,7 @@ export class App extends Component {
           <ContactForm onSubmit={this.onAddContact} />
         </Box>
         <Box title="Contacts">
-          <input
-            name="filter"
-            onChange={this.handleChange}
-            placeholder="enter name or number"
-          />
+          <Filter filter={this.state.filter} onChange={this.handleChange} />
           <ContactList
             className={css.contacts}
             contacts={contacts}
